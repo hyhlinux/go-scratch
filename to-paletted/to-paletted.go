@@ -1,5 +1,9 @@
 package main
 
+// Demonstrates how to create a paletted image, e.g. GIF, from a full RGB image.
+// The default encoding uses a pre-defined palette that creates non-optimal
+// results.
+
 import (
 	"image"
 	"image/color/palette"

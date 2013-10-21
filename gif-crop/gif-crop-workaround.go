@@ -1,5 +1,8 @@
 package main
 
+// Shows a possible workaround for the gif encoder bug where images with bounds
+// that don't start at (0,0) are incorrectly encoded.
+
 import (
 	"image"
 	"image/draw"

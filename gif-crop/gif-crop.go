@@ -1,5 +1,8 @@
 package main
 
+// Demonstrates a bug in the gif encoder when an image with non-(0,0) bounds is
+// saved.  See https://code.google.com/p/go/issues/detail?id=6635
+
 import (
 	"image"
 	"image/gif"
