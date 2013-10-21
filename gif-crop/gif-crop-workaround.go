@@ -2,6 +2,7 @@ package main
 
 import (
 	"image"
+	"image/draw"
 	"image/gif"
 	"image/jpeg"
 	"log"
@@ -32,10 +33,16 @@ func main() {
 
 	// Should only be one frame.
 	for index, frame := range im.Image {
-		im.Image[index] = frame.SubImage(dstBounds).(*image.Paletted)
+		si := frame.SubImage(dstBounds)
+
+		// Creates a new image bounded at (0,0) and copies in the SubImage.
+		b := image.Rect(0, 0, dstBounds.Dx(), dstBounds.Dy())
+		pm := image.NewPaletted(b, frame.Palette)
+		draw.Draw(pm, b, si, dstBounds.Min, draw.Src)
+		im.Image[index] = pm
 	}
 
-	gout, err := os.Create("actual.gif")
+	gout, err := os.Create("actual.wa.gif")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
@@ -43,7 +50,7 @@ func main() {
 	gif.EncodeAll(gout, im)
 
 	// Save the frame as a jpeg.
-	jout, err := os.Create("expected.jpg")
+	jout, err := os.Create("expected.wa.jpg")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
