@@ -6,7 +6,7 @@ Actual result from gif-crop.go:
 
 ![](actual.gif)
 
-Expected result from gif-grop.go:
+Expected result from gif-crop.go:
 
 ![](expected.jpg)
 
